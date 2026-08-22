@@ -1,0 +1,80 @@
+/* ============================== 예약 완료 화면 ============================== */
+
+.done {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 36px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #2a3150 0%, #1a2035 55%, #0d1122 100%);
+}
+
+.done__check {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  box-shadow: 0 0 32px rgba(245, 216, 76, 0.25);
+  animation: fadeUp 0.5s ease backwards;
+}
+
+.done__title {
+  margin: 0;
+  font-family: 'Kirang Haerang', 'Song Myung', serif;
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  animation: fadeUp 0.5s ease 0.08s backwards;
+}
+
+.done__panel {
+  animation: fadeUp 0.5s ease 0.16s backwards;
+}
+
+.done__note {
+  margin: 0;
+  font-family: 'Gowun Batang', serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: #969db6;
+  animation: fadeUp 0.5s ease 0.22s backwards;
+}
+
+.done__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  animation: fadeUp 0.5s ease 0.28s backwards;
+}
+
+.done__button {
+  padding: 11px 26px;
+  font-family: 'Black Han Sans', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.done__button--primary {
+  border: none;
+  background: var(--gold);
+  color: var(--gold-ink);
+}
+
+.done__button--ghost {
+  border: 1.5px solid rgba(245, 216, 76, 0.5);
+  background: transparent;
+  color: var(--gold);
+}

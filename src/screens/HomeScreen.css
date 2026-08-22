@@ -1,0 +1,288 @@
+/* ================================ 홈 화면 ================================ */
+
+.home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #2a3150 0%, #1a2035 45%, #0d1122 100%);
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.35s ease;
+}
+
+/* --------------------------------- 별 --------------------------------- */
+.home__star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #e8e6f0;
+}
+
+.home__star--1 {
+  top: 46px;
+  left: 52px;
+  animation: flicker 4.5s ease-in-out infinite;
+}
+
+.home__star--2 {
+  top: 36px;
+  left: 210px;
+  animation: flicker 6.2s ease-in-out 0.6s infinite;
+}
+
+.home__star--3 {
+  top: 70px;
+  left: 300px;
+  width: 3px;
+  height: 3px;
+  animation: flicker 5.4s ease-in-out 1.4s infinite;
+}
+
+.home__star--4 {
+  top: 170px;
+  left: 40px;
+  animation: flicker 5s ease-in-out 0.9s infinite;
+}
+
+.home__star--5 {
+  top: 130px;
+  left: 330px;
+  animation: flicker 6.8s ease-in-out 2s infinite;
+}
+
+/* --------------------------------- 달 --------------------------------- */
+.home__moon {
+  position: absolute;
+  top: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #f2f0f7, #d8d5e6);
+  box-shadow: 0 0 80px 30px rgba(232, 230, 239, 0.35);
+}
+
+/* -------------------------------- 구름 -------------------------------- */
+.home__cloud {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.home__cloud--low {
+  top: 222px;
+  height: 52px;
+  animation: cloudPassSlow 38s linear 4s infinite;
+}
+
+.home__cloud--low svg {
+  filter: blur(7px);
+}
+
+.home__cloud--high {
+  top: 58px;
+  height: 44px;
+  animation: cloudPass 46s linear 12s infinite;
+}
+
+.home__cloud--high svg {
+  filter: blur(9px);
+}
+
+/* ------------------------------ 바닥 빛번짐 ------------------------------ */
+.home__ground-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 78% 92% at 50% 104%,
+    rgba(142, 124, 214, 0.5),
+    rgba(74, 68, 132, 0.26) 46%,
+    transparent 78%
+  );
+}
+
+.home__haze {
+  position: absolute;
+  bottom: 96px;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  pointer-events: none;
+  filter: blur(16px);
+  background: radial-gradient(ellipse 60% 60% at 48% 70%, rgba(196, 180, 255, 0.22), transparent 70%);
+}
+
+/* ------------------------------ 집과 나무 ------------------------------ */
+.home__house {
+  position: absolute;
+  bottom: -34px;
+  left: 0;
+  z-index: 1;
+}
+
+.home__tree {
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.home__tree--left {
+  left: -14px;
+}
+
+.home__tree--right {
+  right: -18px;
+  transform: scaleX(-1);
+}
+
+/* ------------------------------- 유령 ------------------------------- */
+.home__ghost {
+  position: absolute;
+  pointer-events: none;
+}
+
+.home__ghost--a {
+  top: 236px;
+  left: 44px;
+  animation: ghostDriftA 9s ease-in-out infinite;
+}
+
+.home__ghost--b {
+  top: 188px;
+  right: 52px;
+  animation: ghostDriftB 12s ease-in-out 1.4s infinite;
+}
+
+.ghost-glow--a {
+  animation: ghostGlow 9s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(226, 232, 255, 0.5));
+}
+
+.ghost-glow--b {
+  animation: ghostGlow 12s ease-in-out 1.4s infinite;
+  filter: drop-shadow(0 0 10px rgba(226, 232, 255, 0.45));
+}
+
+.ghost-bob--1 {
+  animation: ghostBob 3.6s ease-in-out 0s infinite;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 8px rgba(226, 232, 255, 0.45));
+}
+
+.ghost-bob--2 {
+  animation: ghostBob 4.4s ease-in-out 0.8s infinite;
+  opacity: 0.65;
+  filter: drop-shadow(0 0 8px rgba(226, 232, 255, 0.45));
+}
+
+/* -------------------------------- 안개 -------------------------------- */
+.home__fog {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.home__fog--left {
+  bottom: 150px;
+  left: -80px;
+  width: 360px;
+  height: 110px;
+  background: radial-gradient(closest-side, rgba(106, 90, 205, 0.16), transparent);
+  filter: blur(14px);
+  animation: fogDrift 11s ease-in-out infinite alternate;
+}
+
+.home__fog--right {
+  bottom: 80px;
+  right: -100px;
+  width: 400px;
+  height: 120px;
+  background: radial-gradient(closest-side, rgba(154, 160, 184, 0.1), transparent);
+  filter: blur(16px);
+  animation: fogDrift 14s ease-in-out 2s infinite alternate-reverse;
+}
+
+/* ------------------------------ 타이틀 · CTA ------------------------------ */
+.home__title-block {
+  position: relative;
+  z-index: 2;
+  margin-top: 282px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.home__title {
+  margin: 0;
+  font-family: 'Kirang Haerang', 'Song Myung', serif;
+  font-weight: 400;
+  font-size: 54px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(245, 216, 76, 0.35);
+  white-space: nowrap;
+}
+
+.home__subtitle {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Dokdo', 'Nanum Myeongjo', serif;
+  font-weight: 400;
+  font-size: 23px;
+  letter-spacing: 4px;
+  color: #b3bad0;
+}
+
+.home__subtitle-brand {
+  color: var(--text-soft);
+}
+
+.home__subtitle-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.home__cta-row {
+  position: relative;
+  z-index: 2;
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.home__cta {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 5px;
+  background: var(--gold);
+  color: var(--gold-ink);
+  font-family: 'Kirang Haerang', 'Song Myung', serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: blinkBtn var(--blink-duration) ease-in-out infinite;
+}
+
+.home__cta span {
+  letter-spacing: 3px;
+  margin-right: -3px;
+}

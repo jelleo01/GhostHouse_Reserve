@@ -1,0 +1,198 @@
+/* ==========================================================================
+   전역 스타일 · 디자인 토큰 · 키프레임
+   (Claude Design 원본의 <helmet><style> 블록을 그대로 옮긴 것)
+   ========================================================================== */
+
+:root {
+  /* 색 토큰 */
+  --gold: #f5d84c;
+  --gold-ink: #1a2035;
+  --night: #0d1122;
+  --frame-bg: #12172a;
+  --panel-bg: #171c31;
+  --line: #3a4260;
+  --text: #e8e8ef;
+  --text-dim: #9aa0b8;
+  --text-mute: #565d78;
+  --text-soft: #c9cede;
+
+  /* 홈 화면 예약 버튼 깜빡임 주기 (원본 blinkSeconds prop = 2.2s) */
+  --blink-duration: 2.2s;
+}
+
+/* --------------------------------------------------------------------------
+   선택 버튼(인원/시간) 색 조합.
+   원본 Claude Design의 palette prop 3종을 CSS 변수 테마로 옮겼다.
+   App.jsx 의 <div className={`phone-frame ${THEME}`}> 에서 클래스만 바꾸면 된다.
+   -------------------------------------------------------------------------- */
+.theme-yellow {
+  --pick-bg: transparent;
+  --pick-fg: #c9cede;
+  --pick-bc: #3a4260;
+  --pick-sel-bg: #f5d84c;
+  --pick-sel-fg: #1a2035;
+  --pick-sel-bc: #f5d84c;
+}
+
+.theme-navy {
+  --pick-bg: #232941;
+  --pick-fg: #c9cede;
+  --pick-bc: #232941;
+  --pick-sel-bg: #f5d84c;
+  --pick-sel-fg: #1a2035;
+  --pick-sel-bc: #f5d84c;
+}
+
+.theme-purple {
+  --pick-bg: transparent;
+  --pick-fg: #b7addf;
+  --pick-bc: #4b3f8f;
+  --pick-sel-bg: #6a5acd;
+  --pick-sel-fg: #fff;
+  --pick-sel-bc: #6a5acd;
+}
+
+body {
+  margin: 0;
+  background: var(--night);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--gold);
+}
+
+a:hover {
+  color: #ffe97a;
+}
+
+input::placeholder {
+  color: var(--text-mute);
+}
+
+/* ---------------------------------- 키프레임 ---------------------------------- */
+
+@keyframes blinkBtn {
+  0%,
+  100% {
+    box-shadow: 0 0 28px rgba(245, 216, 76, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 6px rgba(245, 216, 76, 0.12);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  7% {
+    opacity: 0.3;
+  }
+  11% {
+    opacity: 0.85;
+  }
+  48% {
+    opacity: 0.9;
+  }
+  53% {
+    opacity: 0.2;
+  }
+  57% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes fogDrift {
+  from {
+    transform: translateX(-16px);
+  }
+  to {
+    transform: translateX(22px);
+  }
+}
+
+@keyframes ghostDriftA {
+  0% {
+    transform: translate(0, 0) rotate(-3deg);
+  }
+  50% {
+    transform: translate(34px, -22px) rotate(4deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(-3deg);
+  }
+}
+
+@keyframes ghostDriftB {
+  0% {
+    transform: translate(0, 0) rotate(4deg);
+  }
+  50% {
+    transform: translate(-28px, 16px) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(4deg);
+  }
+}
+
+@keyframes ghostGlow {
+  0%,
+  100% {
+    opacity: 0.16;
+  }
+  50% {
+    opacity: 0.46;
+  }
+}
+
+@keyframes ghostBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(5deg);
+  }
+}
+
+@keyframes cloudPass {
+  0% {
+    transform: translateX(-140%);
+  }
+  100% {
+    transform: translateX(140%);
+  }
+}
+
+@keyframes cloudPassSlow {
+  0% {
+    transform: translateX(150%);
+  }
+  100% {
+    transform: translateX(-150%);
+  }
+}
+
+/* 접근성: 애니메이션 최소화 설정을 켠 사용자는 움직임을 끈다 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

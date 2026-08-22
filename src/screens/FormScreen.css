@@ -1,0 +1,120 @@
+/* ============================= 대표자 정보 화면 ============================= */
+
+.form {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  /* 세로가 넉넉하면 원본 간격(18px / 16·24px)을 그대로 쓰고,
+     화면이 짧은 폰에서는 자동으로 좁혀서 아래가 잘리지 않게 한다 */
+  padding: 16px 28px 24px;
+  padding: clamp(12px, 1.9dvh, 16px) 28px clamp(14px, 2.8dvh, 24px);
+  gap: 18px;
+  gap: clamp(10px, 2.1dvh, 18px);
+
+  box-sizing: border-box;
+  animation: fadeUp 0.3s ease;
+  background: radial-gradient(140% 55% at 50% 0%, rgba(106, 90, 205, 0.13), transparent 65%);
+}
+
+.form__title {
+  margin: 10px 0 0;
+  font-family: 'Kirang Haerang', 'Song Myung', serif;
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-align: center;
+}
+
+.form__field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.form__label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.form__input {
+  width: 240px;
+  padding: 10px 4px;
+  border: none;
+  border-bottom: 2px solid var(--gold);
+  outline: none;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 17px;
+  color: #fff;
+  background: transparent;
+}
+
+.form__hint {
+  margin: 0;
+  min-height: 15px;
+  font-family: 'Gowun Batang', serif;
+  font-size: 12px;
+  color: #d19478;
+}
+
+.form__spacer {
+  flex: 1;
+}
+
+/* ----------------------------- 확인 체크박스 ----------------------------- */
+.confirm-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Gowun Batang', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-soft);
+  transition: color 0.15s;
+}
+
+.confirm-row.is-on {
+  color: var(--gold);
+}
+
+.confirm-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  box-sizing: border-box;
+  border: 1.5px solid var(--line);
+  background: transparent;
+  color: transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.confirm-row.is-on .confirm-box {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--gold-ink);
+}
+
+/* -------------------------------- 제출 -------------------------------- */
+.form__submit-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}

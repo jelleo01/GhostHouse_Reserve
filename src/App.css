@@ -1,0 +1,32 @@
+/* 390 x 844 (iPhone 14 Pro) 목업 프레임 — 원본 디자인의 최상위 래퍼 */
+.phone-frame {
+  width: 390px;
+  height: 844px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  flex-direction: column;
+  background: var(--frame-bg);
+  overflow: hidden;
+  position: relative;
+}
+
+/* 화면 전체에 깔리는 비네팅(모서리 어둡게) */
+.phone-frame__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(120% 90% at 50% 45%, transparent 62%, rgba(5, 7, 15, 0.42) 100%);
+}
+
+/* 실제 폰에서는 화면을 꽉 채운다.
+   높이가 모자라면 각 화면이 알아서 줄어들거나(선택 화면의 시간표는 스크롤)
+   대응하므로 아래가 잘리지 않는다. */
+@media (max-width: 430px) {
+  .phone-frame {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+  }
+}

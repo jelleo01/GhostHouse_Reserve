@@ -1,0 +1,103 @@
+/* ============================ 시간 드럼 선택기 ============================
+   시(hour) / 분(minute) 두 개의 휠을 굴려서 시간을 고른다.
+   스크롤 스냅 + 위아래 페이드로 아이폰 시간 선택기 느낌을 낸다.
+   ========================================================================= */
+
+.wheel {
+  position: relative;
+  width: 190px;
+  margin: 0 auto;
+
+  /* 5칸(200px) ~ 7칸(280px). 화면이 크면 더 많이 보여준다.
+     칸 높이(40px)는 고정이라 스크롤 계산은 높이와 무관하다. */
+  height: 200px;
+  height: clamp(200px, 32dvh, 280px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 가운데 선택 밴드 */
+.wheel__band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% - 20px);
+  height: 40px;
+  border-top: 1.5px solid var(--line);
+  border-bottom: 1.5px solid var(--line);
+  background: rgba(245, 216, 76, 0.06);
+  pointer-events: none;
+}
+
+.wheel__list {
+  width: 74px;
+  height: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  /* 위아래로 갈수록 흐려지는 드럼 느낌 */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 26%,
+    #000 74%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 74%, transparent 100%);
+}
+
+.wheel__list::-webkit-scrollbar {
+  display: none;
+}
+
+/* 첫/마지막 항목도 가운데로 올 수 있게 하는 위아래 여백 */
+.wheel__pad {
+  height: calc(50% - 20px);
+}
+
+.wheel__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  scroll-snap-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #5d6480;
+  cursor: pointer;
+  transition: color 0.12s;
+}
+
+.wheel__item.is-active {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* 이미 예약된 시간 */
+.wheel__item.is-reserved {
+  color: #454b63;
+  text-decoration: line-through;
+}
+
+.wheel__item.is-active.is-reserved {
+  color: #d19478;
+}
+
+.wheel__colon {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  transform: translateY(-1px);
+}

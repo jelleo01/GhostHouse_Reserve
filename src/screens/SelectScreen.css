@@ -1,0 +1,109 @@
+/* =========================== 인원 · 시간 선택 화면 =========================== */
+
+.select {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  animation: fadeUp 0.3s ease;
+  background: radial-gradient(140% 55% at 50% 0%, rgba(106, 90, 205, 0.13), transparent 65%);
+
+  /* 세로가 넉넉하면 원본 간격을 쓰고, 짧은 폰에서는 자동으로 좁아진다 */
+  padding: 16px 24px 18px;
+  padding: clamp(12px, 1.9dvh, 16px) 24px clamp(14px, 2.1dvh, 18px);
+  gap: 14px;
+  gap: clamp(10px, 1.7dvh, 14px);
+}
+
+.select__section-title {
+  margin: 0;
+  font-family: 'Kirang Haerang', 'Song Myung', serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-align: center;
+}
+
+/* -------------------------------- 인원수 -------------------------------- */
+.select__people {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.select__people-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* --------------------------------- 시간 --------------------------------- */
+.select__time {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 로딩 / 에러 자리 — 휠과 같은 높이라 데이터가 오면 화면이 흔들리지 않는다 */
+.select__time-state {
+  height: 200px;
+  height: clamp(200px, 32dvh, 280px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* -------------------------------- 범례 -------------------------------- */
+.select__legend {
+  margin: 0;
+  min-height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: 'Gowun Batang', serif;
+  font-size: 12px;
+  color: #8b93ae;
+  text-align: center;
+}
+
+.select__legend-chip {
+  padding: 2px 9px;
+  border-radius: 4px;
+  background: #1b2033;
+  color: #5d6480;
+  text-decoration: line-through;
+  font-weight: 600;
+}
+
+.select__legend-warn {
+  color: #d19478;
+}
+
+/* -------------------------------- 하단 -------------------------------- */
+.select__spacer {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.select__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.select__summary {
+  margin: 0;
+  min-height: 18px;
+  font-family: 'Gowun Batang', serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #a8afc6;
+}

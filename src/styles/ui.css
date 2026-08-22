@@ -1,0 +1,179 @@
+/* ==========================================================================
+   여러 화면에서 공통으로 쓰는 UI 요소
+   ========================================================================== */
+
+/* ------------------------------ 뒤로가기 버튼 ------------------------------ */
+.back-button {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border: 1.5px solid var(--line);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ------------------------------ 단계 표시기 ------------------------------ */
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 뒤로가기 버튼과 폭을 맞춰 가운데 정렬을 유지하기 위한 여백 */
+.step-header__spacer {
+  width: 44px;
+  flex: none;
+}
+
+.step-indicator {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.step-indicator__item {
+  color: var(--text-mute);
+}
+
+.step-indicator__item.is-current {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.step-indicator__bar {
+  width: 14px;
+  height: 1px;
+  background: var(--line);
+}
+
+/* --------------------------- 인원 / 시간 선택 버튼 --------------------------- */
+.pick-btn {
+  background: var(--pick-bg);
+  color: var(--pick-fg);
+  border: 1.5px solid var(--pick-bc);
+  border-radius: 4px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.pick-btn.is-selected {
+  background: var(--pick-sel-bg);
+  color: var(--pick-sel-fg);
+  border-color: var(--pick-sel-bc);
+}
+
+.pick-btn--people {
+  width: 54px;
+  height: 46px;
+  font-size: 15px;
+}
+
+/* ------------------------------- 주요 버튼(CTA) ------------------------------- */
+.cta {
+  border: none;
+  font-family: 'Black Han Sans', 'Noto Sans KR', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-indent: 4px;
+  line-height: 1.15;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  background: var(--gold);
+  color: var(--gold-ink);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cta:disabled {
+  background: #232941;
+  color: var(--text-mute);
+  cursor: default;
+}
+
+.cta--next {
+  padding: 13px 56px;
+}
+
+.cta--submit {
+  padding: 13px 48px;
+}
+
+/* --------------------------- 모서리 잘린 요약 패널 --------------------------- */
+.panel {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.5px;
+  background: var(--line);
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+.panel__inner {
+  clip-path: polygon(11px 0, 100% 0, 100% calc(100% - 11px), calc(100% - 11px) 100%, 0 100%, 0 11px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.panel__inner--solid {
+  background: var(--panel-bg);
+  padding: 14px 18px;
+}
+
+.panel__inner--glass {
+  background: rgba(13, 17, 28, 0.75);
+  padding: 16px 20px;
+}
+
+.panel__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.panel__label {
+  color: var(--text-dim);
+}
+
+.panel__value--gold {
+  color: var(--gold);
+}
+
+.panel__value--plain {
+  color: var(--text);
+}
+
+/* ------------------------------ 상태 메시지 ------------------------------ */
+.status-text {
+  margin: 0;
+  font-family: 'Gowun Batang', serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: #8b93ae;
+  text-align: center;
+}
+
+.status-text--error {
+  color: #d19478;
+}
+
+.retry-button {
+  margin-top: 10px;
+  padding: 8px 18px;
+  border: 1.5px solid rgba(245, 216, 76, 0.5);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--gold);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
