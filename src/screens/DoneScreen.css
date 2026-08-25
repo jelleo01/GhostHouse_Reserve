@@ -37,6 +37,28 @@
   animation: fadeUp 0.5s ease 0.08s backwards;
 }
 
+.done__code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--gold);
+  animation: fadeUp 0.5s ease 0.12s backwards;
+}
+
+.done__code-label {
+  color: #969db6;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.done__code strong {
+  font-family: 'Black Han Sans', 'Noto Sans KR', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: 6px;
+}
+
 .done__panel {
   animation: fadeUp 0.5s ease 0.16s backwards;
 }
@@ -48,6 +70,13 @@
   letter-spacing: 0.5px;
   color: #969db6;
   animation: fadeUp 0.5s ease 0.22s backwards;
+}
+
+.done__privacy {
+  margin: -8px 0 0;
+  color: #727a96;
+  font-size: 11px;
+  text-align: center;
 }
 
 .done__actions {

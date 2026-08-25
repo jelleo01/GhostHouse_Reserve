@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BackButton from '../components/BackButton';
 import StepIndicator from '../components/StepIndicator';
 import SummaryPanel, { SummaryRow } from '../components/SummaryPanel';
@@ -21,6 +21,7 @@ import './FormScreen.css';
  *   onChange: (patch: object) => void,
  *   onBack: () => void,
  *   onSubmitted: (reservation: object) => void,
+ *   onSlotTaken: () => void,
  * }} props
  */
 export default function FormScreen({
@@ -32,6 +33,7 @@ export default function FormScreen({
   onChange,
   onBack,
   onSubmitted,
+  onSlotTaken,
 }) {
   const [confirmed, setConfirmed] = useState(false);
   const { submit, submitting, error } = useCreateReservation();
@@ -39,6 +41,10 @@ export default function FormScreen({
   const nameValid = isNameValid(name);
   const phoneValid = isPhoneValid(phone);
   const canSubmit = nameValid && phoneValid && confirmed && !submitting;
+
+  useEffect(() => {
+    if (error?.code === 'SLOT_TAKEN') onSlotTaken();
+  }, [error, onSlotTaken]);
 
   const handleSubmit = async () => {
     const reservation = await submit({ date, time, people, name, phone });
@@ -66,6 +72,9 @@ export default function FormScreen({
           placeholder="22 원혁재"
           onChange={(event) => onChange({ name: event.target.value })}
         />
+        <p className="form__hint">
+          {name && !nameValid ? '학번 2자리와 한글 이름을 입력해주세요' : ''}
+        </p>
       </div>
 
       <div className="form__field">
@@ -109,7 +118,7 @@ export default function FormScreen({
           disabled={!canSubmit}
           onClick={handleSubmit}
         >
-          {submitting ? '예약 중…' : '예약하기'}
+          {submitting ? '예약 중…' : error ? '다시 시도' : '예약하기'}
         </button>
       </div>
     </div>

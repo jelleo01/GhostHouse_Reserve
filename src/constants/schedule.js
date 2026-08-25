@@ -7,7 +7,7 @@
 export const EVENT_DATE = '2026-09-03';
 
 /** 인원 선택 옵션 */
-export const PEOPLE_OPTIONS = [1, 2, 3, 4];
+export const PEOPLE_OPTIONS = [2, 3, 4];
 
 /** 운영 시간: 12:30 ~ 20:30, 15분 간격 */
 export const OPERATING_HOURS = {

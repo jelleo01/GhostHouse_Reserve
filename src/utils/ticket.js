@@ -2,9 +2,10 @@
  * 예약 확인증을 canvas 로 그려서 PNG 로 내려받는다.
  * (원본 디자인의 saveTicket() 로직을 그대로 옮긴 것)
  *
- * @param {{ name: string, phone: string, people: number|null, time: string|null }} reservation
+ * @param {{ name: string, phone: string, people: number|null, time: string|null,
+ *           code: string|null }} reservation
  */
-export function saveTicketImage({ name, phone, people, time }) {
+export function saveTicketImage({ name, phone, people, time, code }) {
   const WIDTH = 340;
   const HEIGHT = 430;
   const SCALE = 2;
@@ -56,6 +57,7 @@ export function saveTicketImage({ name, phone, people, time }) {
 
   // 항목
   const rows = [
+    ['예약번호', code ?? '', '#f5d84c'],
     ['대표자', name, '#e8e8ef'],
     ['연락처', phone, '#e8e8ef'],
     ['인원', `${people ?? ''}명`, '#f5d84c'],

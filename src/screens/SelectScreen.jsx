@@ -16,6 +16,7 @@ import './SelectScreen.css';
  *   date: string,
  *   people: number | null,
  *   time: string | null,
+ *   notice?: string,
  *   onSelectPeople: (people: number) => void,
  *   onSelectTime: (time: string) => void,
  *   onBack: () => void,
@@ -26,6 +27,7 @@ export default function SelectScreen({
   date,
   people,
   time,
+  notice,
   onSelectPeople,
   onSelectTime,
   onBack,
@@ -87,6 +89,8 @@ export default function SelectScreen({
       {/* --------------------------------- 시간 --------------------------------- */}
       <div className="select__time">
         <h2 className="select__section-title">시간</h2>
+
+        {notice && <p className="status-text status-text--error">{notice}</p>}
 
         {loading && (
           <div className="select__time-state">

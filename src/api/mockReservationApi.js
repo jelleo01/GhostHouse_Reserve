@@ -56,7 +56,10 @@ export async function mockCreateReservation(payload, { signal } = {}) {
   await delay(600, signal);
 
   if (bookedTimes.has(payload.time)) {
-    throw new ApiError('방금 다른 팀이 예약했어요. 다른 시간을 선택해주세요.', { status: 409 });
+    throw new ApiError('방금 다른 분이 예약했습니다. 다른 시간을 선택해주세요.', {
+      code: 'SLOT_TAKEN',
+      status: 409,
+    });
   }
   bookedTimes.add(payload.time);
 
