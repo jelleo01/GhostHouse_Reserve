@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { createReservation } from '../api/reservationApi';
 
 /**
@@ -13,10 +13,13 @@ import { createReservation } from '../api/reservationApi';
 export function useCreateReservation() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const submittingRef = useRef(false);
 
   const resetError = useCallback(() => setError(null), []);
 
   const submit = useCallback(async (input) => {
+    if (submittingRef.current) return null;
+    submittingRef.current = true;
     setSubmitting(true);
     setError(null);
     try {
@@ -25,6 +28,7 @@ export function useCreateReservation() {
       setError(caught);
       return null;
     } finally {
+      submittingRef.current = false;
       setSubmitting(false);
     }
   }, []);

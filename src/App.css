@@ -1,7 +1,7 @@
-/* 390 x 844 (iPhone 14 Pro) 목업 프레임 — 원본 디자인의 최상위 래퍼 */
+/* PC에서는 세로가 과도하게 길어 보이지 않도록 390 x 720 안에 맞춘다. */
 .phone-frame {
   width: 390px;
-  height: 844px;
+  height: min(720px, calc(100dvh - 32px));
   margin: 0 auto;
   font-family: 'Noto Sans KR', sans-serif;
   display: flex;
@@ -9,6 +9,7 @@
   background: var(--frame-bg);
   overflow: hidden;
   position: relative;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.42);
 }
 
 /* 화면 전체에 깔리는 비네팅(모서리 어둡게) */
@@ -28,5 +29,6 @@
     width: 100%;
     height: 100vh;
     height: 100dvh;
+    box-shadow: none;
   }
 }

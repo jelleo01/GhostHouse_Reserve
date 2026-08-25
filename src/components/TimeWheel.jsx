@@ -5,6 +5,8 @@ import './TimeWheel.css';
 const ITEM_HEIGHT = 40;
 /** 스크롤이 멈췄다고 판단하는 시간(ms) */
 const SETTLE_DELAY = 120;
+/** PC 마우스 휠 연속 입력 사이의 최소 간격(ms) */
+const WHEEL_STEP_DELAY = 100;
 
 const clampIndex = (index, length) => Math.max(0, Math.min(length - 1, index));
 
@@ -20,6 +22,8 @@ const clampIndex = (index, length) => Math.max(0, Math.min(length - 1, index));
 function WheelColumn({ items, activeValue, onPick, label }) {
   const listRef = useRef(null);
   const settleTimer = useRef(null);
+  const wheelTimer = useRef(null);
+  const wheelLocked = useRef(false);
   /** 사용자가 지금 이 휠을 굴리는 중인지 (굴리는 동안은 위치를 건드리면 안 된다) */
   const rolling = useRef(false);
 
@@ -34,7 +38,43 @@ function WheelColumn({ items, activeValue, onPick, label }) {
     if (Math.abs(list.scrollTop - target) > 2) list.scrollTop = target;
   }, [index]);
 
-  useEffect(() => () => clearTimeout(settleTimer.current), []);
+  useEffect(
+    () => () => {
+      clearTimeout(settleTimer.current);
+      clearTimeout(wheelTimer.current);
+    },
+    []
+  );
+
+  // 마우스 휠은 입력량과 관계없이 한 번에 한 칸만 이동시킨다.
+  // 터치·드래그 스크롤에는 관여하지 않아 모바일 감도는 그대로 유지된다.
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return undefined;
+
+    const handleWheel = (event) => {
+      event.preventDefault();
+      if (wheelLocked.current || event.deltaY === 0) return;
+
+      const currentIndex = clampIndex(
+        Math.round(list.scrollTop / ITEM_HEIGHT),
+        items.length
+      );
+      const direction = event.deltaY > 0 ? 1 : -1;
+      const nextIndex = clampIndex(currentIndex + direction, items.length);
+
+      if (nextIndex === currentIndex) return;
+
+      wheelLocked.current = true;
+      list.scrollTo({ top: nextIndex * ITEM_HEIGHT, behavior: 'smooth' });
+      wheelTimer.current = setTimeout(() => {
+        wheelLocked.current = false;
+      }, WHEEL_STEP_DELAY);
+    };
+
+    list.addEventListener('wheel', handleWheel, { passive: false });
+    return () => list.removeEventListener('wheel', handleWheel);
+  }, [items]);
 
   const handleScroll = () => {
     const list = listRef.current;

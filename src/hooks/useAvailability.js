@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { fetchAvailability } from '../api/reservationApi';
 
+const REFRESH_INTERVAL_MS = 15_000;
+
 /**
  * 예약 가능 시간 조회 훅.
  * 화면은 slots / loading / error / reload 만 알면 되고,
@@ -39,9 +41,14 @@ export function useAvailability(date) {
     };
   }, [date, requestKey]);
 
+  useEffect(() => {
+    const interval = setInterval(reload, REFRESH_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [date, reload]);
+
   return {
     slots: result.slots,
-    loading: result.key !== requestKey,
+    loading: result.key === null,
     error: result.error,
     reload,
   };

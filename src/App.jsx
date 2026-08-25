@@ -22,6 +22,7 @@ export default function App() {
 
   /** 서버가 돌려준 예약 정보 (예약번호 등). 지금은 mock 응답이 들어온다. */
   const [reservation, setReservation] = useState(null);
+  const [selectionNotice, setSelectionNotice] = useState('');
 
   const patchForm = useCallback((patch) => {
     setForm((prev) => ({ ...prev, ...patch }));
@@ -35,9 +36,16 @@ export default function App() {
     setScreen('done');
   }, []);
 
+  const handleSlotTaken = useCallback(() => {
+    setForm((prev) => ({ ...prev, time: null }));
+    setSelectionNotice('방금 다른 분이 예약했습니다. 다른 시간을 선택해주세요.');
+    setScreen('select');
+  }, []);
+
   const restart = useCallback(() => {
     setForm(EMPTY_FORM);
     setReservation(null);
+    setSelectionNotice('');
     setScreen('home');
   }, []);
 
@@ -50,10 +58,17 @@ export default function App() {
           date={EVENT_DATE}
           people={form.people}
           time={form.time}
+          notice={selectionNotice}
           onSelectPeople={selectPeople}
           onSelectTime={selectTime}
-          onBack={() => setScreen('home')}
-          onNext={() => setScreen('form')}
+          onBack={() => {
+            setSelectionNotice('');
+            setScreen('home');
+          }}
+          onNext={() => {
+            setSelectionNotice('');
+            setScreen('form');
+          }}
         />
       )}
 
@@ -67,6 +82,7 @@ export default function App() {
           onChange={patchForm}
           onBack={() => setScreen('select')}
           onSubmitted={handleSubmitted}
+          onSlotTaken={handleSlotTaken}
         />
       )}
 
@@ -76,6 +92,7 @@ export default function App() {
           phone={reservation?.phone ?? form.phone}
           people={reservation?.people ?? form.people}
           time={reservation?.time ?? form.time}
+          code={reservation?.code}
           onRestart={restart}
         />
       )}

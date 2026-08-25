@@ -30,8 +30,9 @@ src/
   App.css                  390x844 목업 프레임
 
   api/                     ⚠ 백엔드 연결 지점 (UI와 분리된 곳)
-    reservationApi.js        fetchAvailability() / createReservation()
-    apiClient.js             fetch 래퍼 + ApiError
+    reservationApi.js        Supabase RPC 호출 + 응답 정규화
+    supabaseClient.js         Supabase 클라이언트 생성
+    apiClient.js             ApiError
     mockReservationApi.js    서버 없을 때 쓰는 가짜 구현
   hooks/
     useAvailability.js       예약 가능 시간 조회
@@ -43,39 +44,22 @@ src/
   styles/ui.css            버튼·패널 등 공통 스타일
 ```
 
-## 백엔드 붙일 때 할 일
+## Supabase 연결
 
-화면 코드는 `fetch` 를 전혀 모른다. 아래만 바꾸면 된다.
+화면 코드는 Supabase를 직접 호출하지 않고 `src/api/reservationApi.js`만 사용한다.
 
 1. `.env.example` 을 `.env` 로 복사하고 값 채우기
 
    ```
-   VITE_API_BASE_URL=https://api.example.com
+   VITE_SUPABASE_URL=https://your-project.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-anon-public-key
    VITE_USE_MOCK=false
    ```
 
-2. `src/api/reservationApi.js` 의 `PATHS` 를 서버 스펙에 맞추기
+2. 개발 서버를 다시 시작한다. 시간표 조회는 `get_availability`, 예약 생성은
+   `create_reservation` RPC를 호출한다.
 
-   | 화면 동작        | 함수                   | 기본 엔드포인트                            |
-   | ---------------- | ---------------------- | ------------------------------------------ |
-   | 시간표 불러오기  | `fetchAvailability()`  | `GET  /reservations/availability?date=...`  |
-   | 예약하기 누르기  | `createReservation()`  | `POST /reservations`                        |
-
-3. 응답 필드명이 다르면 같은 파일의 `normalizeAvailability` / `normalizeSlot` /
-   `normalizeReservation` 만 고치면 된다.
-
-기대하는 응답 형태:
-
-```jsonc
-// GET /reservations/availability?date=2026-09-03
-{ "date": "2026-09-03", "slots": [{ "time": "12:30", "status": "open", "remaining": 4 }] }
-
-// POST /reservations  { date, time, people, name, phone }
-{ "id": "...", "code": "...", "date": "...", "time": "...", "people": 2, "name": "...", "phone": "..." }
-```
-
-`createReservation()` 이 돌려준 값은 `App.jsx` 의 `reservation` 상태에 들어간다.
-예약번호를 완료 화면에 보여주고 싶으면 `DoneScreen` 에 한 줄만 추가하면 된다.
+`VITE_USE_MOCK=true`로 두면 Supabase 없이 화면 흐름을 확인할 수 있다.
 
 ## 알아둘 것
 
